@@ -5,9 +5,8 @@ passlib==1.7.4
 python-multipart==0.0.6
 supabase==2.0.3
 python-dotenv==1.0.0
-openai==1.3.5
 pydantic==2.5.2
-pydantic-settings==2.1.0  # Tambahkan ini
+pydantic-settings==2.1.0
 bcrypt==4.0.1
 python-jose[cryptography]==3.3.0
 email-validator==2.1.0

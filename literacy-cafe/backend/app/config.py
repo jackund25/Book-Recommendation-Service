@@ -15,9 +15,6 @@ class Settings(BaseSettings):
     # Supabase
     SUPABASE_URL: Optional[str] = None
     SUPABASE_KEY: Optional[str] = None
-    
-    # OpenAI
-    OPENAI_API_KEY: Optional[str] = None
 
     class Config:
         env_file = ".env"

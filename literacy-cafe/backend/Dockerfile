@@ -1,32 +1,30 @@
-# Backend Dockerfile
-FROM python:3.9-slim
+# Dockerfile
+FROM python:3.11-slim
 
+# Set working directory
 WORKDIR /app
 
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends gcc \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt .
+# Install project dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Remove unused AI dependencies
+RUN pip uninstall -y openai
+
+# Copy project
 COPY . .
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-
-# docker-compose.yml
-version: '3.8'
-services:
-  backend:
-    build: ./backend
-    ports:
-      - "8000:8000"
-    environment:
-      - SUPABASE_URL=${SUPABASE_URL}
-      - SUPABASE_KEY=${SUPABASE_KEY}
-      - AI_SERVICE_KEY=${AI_SERVICE_KEY}
-    volumes:
-      - ./backend:/app
-    restart: always
-    networks:
-      - literacy-cafe-network
-
-networks:
-  literacy-cafe-network:
-    driver: bridge
+# Command to run the application
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
