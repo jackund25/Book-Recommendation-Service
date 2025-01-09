@@ -1,4 +1,3 @@
-# Dockerfile
 FROM python:3.11-slim
 
 # Set working directory
@@ -16,12 +15,7 @@ RUN apt-get update \
 
 # Install Python dependencies
 COPY requirements.txt .
-# Install project dependencies
-COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Remove unused AI dependencies
-RUN pip uninstall -y openai
 
 # Copy project
 COPY . .
