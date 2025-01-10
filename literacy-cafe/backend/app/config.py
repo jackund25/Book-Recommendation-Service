@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     
     # Security
-    SECRET_KEY: str = "your-secret-key-here"  # Ganti dengan secret key yang aman
+    SECRET_KEY: str = "rg7RtE5l1fKp09hAFU2dfIiqD77R9Sk5_4l4scHF1-I"  # Ganti dengan secret key yang aman
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
