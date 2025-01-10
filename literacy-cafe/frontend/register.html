@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Literacy Cafe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/register.css">
+</head>
+<body>
+    <a href="./" class="back-home">← Back to Home</a>
+
+    <div class="register-container">
+        <div class="logo-section">
+            <h1>Create Account</h1>
+            <p>Join Literacy Cafe to get personalized book recommendations</p>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" required>
+                <span class="validation-message" id="fullNameValidation"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+                <span class="validation-message" id="emailValidation"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-input-container">
+                    <input type="password" id="password" required>
+                    <button type="button" class="toggle-password" id="togglePassword">
+                        <span class="eye-icon">👁️</span>
+                    </button>
+                </div>
+                <span class="validation-message" id="passwordValidation"></span>
+            </div>
+
+            <div class="preferences-section">
+                <label>Reading Preferences (Select at least one)</label>
+                <div class="preferences-grid">
+                    <label class="preference-item">
+                        <input type="checkbox" value="Fiction">
+                        Fiction
+                    </label>
+                    <label class="preference-item">
+                        <input type="checkbox" value="Non-Fiction">
+                        Non-Fiction
+                    </label>
+                    <label class="preference-item">
+                        <input type="checkbox" value="Mystery">
+                        Mystery
+                    </label>
+                    <label class="preference-item">
+                        <input type="checkbox" value="Romance">
+                        Romance
+                    </label>
+                    <label class="preference-item">
+                        <input type="checkbox" value="Science">
+                        Science
+                    </label>
+                    <label class="preference-item">
+                        <input type="checkbox" value="History">
+                        History
+                    </label>
+                    <label class="preference-item">
+                        <input type="checkbox" value="Biography">
+                        Biography
+                    </label>
+                    <label class="preference-item">
+                        <input type="checkbox" value="Fantasy">
+                        Fantasy
+                    </label>
+                </div>
+                <span class="validation-message" id="preferencesValidation"></span>
+            </div>
+
+            <button type="submit" class="register-btn">Create Account</button>
+        </form>
+
+        <p class="login-link">
+            Already have an account? <a href="./login.html">Login here</a>
+        </p>
+    </div>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/register.js"></script>
+</body>
+</html>

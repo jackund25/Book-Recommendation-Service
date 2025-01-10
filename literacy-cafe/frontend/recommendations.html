@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendations - Literacy Cafe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/recommendations.css">
+</head>
+<body>
+    <nav>
+        <div class="container nav-content">
+            <a href="./" class="logo">Literacy Cafe</a>
+            <div class="nav-links">
+                <a href="./">Home</a>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Reading Preferences Section -->
+        <section id="preferencesSection" class="preferences-section">
+            <h2>Your Reading Preferences</h2>
+            <div id="preferencesTags" class="preferences-tags"></div>
+            <button id="editPreferences" class="edit-btn">Edit Preferences</button>
+        </section>
+
+        <!-- Order Section -->
+        <section class="order-section">
+            <h2>What are you having today?</h2>
+            <p>Let us recommend the perfect book to accompany your order</p>
+            
+            <form id="orderForm" class="order-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="drink">Choose Your Drink</label>
+                        <select id="drink" required>
+                            <option value="">Select drink type</option>
+                            <option value="Coffee">Coffee</option>
+                            <option value="Tea">Tea</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="drinkType">Specify Your Drink</label>
+                        <select id="drinkType" required>
+                            <option value="">First select a drink</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="foodCategory">Choose Your Food Category</label>
+                        <select id="foodCategory" required>
+                            <option value="">Select category</option>
+                            <option value="Light">Light</option>
+                            <option value="Heavy">Heavy</option>
+                            <option value="Dessert">Dessert</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="food">Specify Your Food</label>
+                        <select id="food" required>
+                            <option value="">First select a category</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">Get Recommendations</button>
+            </form>
+        </section>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-state">
+            <div class="spinner"></div>
+            <p>Finding perfect books for you...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message"></div>
+
+        <!-- Results Section -->
+        <section id="resultsSection" class="results-section">
+            <div class="results-header">
+                <h2>Your Personalized Recommendations</h2>
+                <div class="filter-sort">
+                    <select id="sortBy" class="sort-select">
+                        <option value="rating">Sort by Rating</option>
+                        <option value="readingTime">Sort by Reading Time</option>
+                        <option value="popularity">Sort by Popularity</option>
+                    </select>
+                    <select id="filterGenre" class="filter-select">
+                        <option value="">All Genres</option>
+                    </select>
+                </div>
+            </div>
+            <div id="recommendationsGrid" class="recommendations-grid"></div>
+        </section>
+    </div>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/recommendations.js"></script>
+</body>
+</html>
