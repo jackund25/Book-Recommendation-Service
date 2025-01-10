@@ -3,9 +3,12 @@
 # Literacy Cafe
 Sistem rekomendasi buku yang dipersonalisasi yang menggabungkan pengalaman kedai kopi dengan literatur. Sistem ini memberikan rekomendasi buku berdasarkan preferensi pengguna dan pesanan kafe mereka saat ini.
 
-# Deployment      : Front End https://literacy-cafe.vercel.app/ 
-                  Back end https://literacy-cafe-production.up.railway.app/
-# Dokumen Laporan : https://docs.google.com/document/d/19WHGTOGocNdMWWPOQ7TLZvNDuclsBEbexcVrWGHwyrs/edit?tab=t.0
+## Deployment
+Front End https://literacy-cafe.vercel.app/ 
+Back end https://literacy-cafe-production.up.railway.app/
+
+## Dokumen Laporan
+https://docs.google.com/document/d/19WHGTOGocNdMWWPOQ7TLZvNDuclsBEbexcVrWGHwyrs/edit?tab=t.0
 
 # Fitur
 1. Sistem autentikasi pengguna
@@ -26,13 +29,13 @@ Sistem rekomendasi buku yang dipersonalisasi yang menggabungkan pengalaman kedai
 - Containerisasi menggunakan Docker
 
 # Getting Started
-# Prerequisites
+## Prerequisites
 
 Docker and Docker Compose
 Node.js
 Python 3.8+
 
-# Installation
+## Installation
 
 1. Clone the repository
 ```
