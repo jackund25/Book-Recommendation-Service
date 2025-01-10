@@ -15,6 +15,7 @@ origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://literacy-cafe-production.up.railway.app",
+    "https://literacy-cafe.vercel.app"
     # Tambahkan origin lain jika diperlukan
 ]
 
