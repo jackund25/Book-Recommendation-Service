@@ -43,3 +43,7 @@ app.include_router(
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
+
+@app.get("/")
+async def welcome():
+    return {"Welcome to Literacy Cafe backend"}
