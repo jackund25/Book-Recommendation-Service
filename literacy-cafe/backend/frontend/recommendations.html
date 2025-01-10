@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendations - Literacy Cafe</title>
+    <style>
+        :root {
+            --primary-bg: #FAF7F0;
+            --secondary-bg: #D8D2C2;
+            --accent: #B17457;
+            --text: #4A4947;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+        }
+
+        nav {
+            background-color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            margin-left: 2rem;
+        }
+
+        .logout-btn {
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            margin-left: 2rem;
+        }
+
+        .order-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--secondary-bg);
+            border-radius: 5px;
+            background: white;
+        }
+
+        .submit-btn {
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .book-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .book-detail {
+            margin-bottom: 0.5rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-content">
+            <a href="/" class="logo">Literacy Cafe</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="order-section">
+            <h2>What are you having today?</h2>
+            <form id="orderForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="drink">Drink</label>
+                        <select id="drink" required>
+                            <option value="">Select drink type</option>
+                            <option value="Coffee">Coffee</option>
+                            <option value="Tea">Tea</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="drinkType">Variation</label>
+                        <select id="drinkType" required>
+                            <option value="">Select drink variation</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="foodCategory">Food Category</label>
+                        <select id="foodCategory" required>
+                            <option value="">Select category</option>
+                            <option value="Light">Light</option>
+                            <option value="Heavy">Heavy</option>
+                            <option value="Dessert">Dessert</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="food">Food Item</label>
+                        <select id="food" required>
+                            <option value="">Select food item</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Get Recommendations</button>
+            </form>
+        </div>
+
+        <div id="loading" class="loading">Finding perfect books for you...</div>
+        <div id="errorMessage" class="error-message"></div>
+        <div id="recommendations" class="recommendations"></div>
+    </div>
+
+    <script>
+        const API_URL = 'https://literacy-cafe-production.up.railway.app/api/v1';
+
+        // Menu options
+        const drinkOptions = {
+            'Coffee': ['Espresso', 'Latte', 'Cappuccino', 'Americano', 'Mocha'],
+            'Tea': ['Green Tea', 'Earl Grey', 'Chamomile', 'Black Tea'],
+            'Others': ['Hot Chocolate', 'Smoothie', 'Fresh Juice']
+        };
+
+        const foodOptions = {
+            'Light': ['Salad', 'Sandwich', 'Croissant'],
+            'Heavy': ['Pasta', 'Rice Bowl', 'Burger'],
+            'Dessert': ['Cake', 'Cookie', 'Ice Cream']
+        };
+
+        // Update drink variations based on drink type
+        document.getElementById('drink').addEventListener('change', (e) => {
+            const drinkType = document.getElementById('drinkType');
+            drinkType.innerHTML = '<option value="">Select variation</option>';
+            
+            if (e.target.value && drinkOptions[e.target.value]) {
+                drinkOptions[e.target.value].forEach(option => {
+                    drinkType.innerHTML += `<option value="${option}">${option}</option>`;
+                });
+            }
+        });
+
+        // Update food items based on category
+        document.getElementById('foodCategory').addEventListener('change', (e) => {
+            const food = document.getElementById('food');
+            food.innerHTML = '<option value="">Select food item</option>';
+            
+            if (e.target.value && foodOptions[e.target.value]) {
+                foodOptions[e.target.value].forEach(option => {
+                    food.innerHTML += `<option value="${option}">${option}</option>`;
+                });
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('orderForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const loading = document.getElementById('loading');
+            const errorMessage = document.getElementById('errorMessage');
+            const recommendations = document.getElementById('recommendations');
+            
+            loading.style.display = 'block';
+            errorMessage.style.display = 'none';
+            recommendations.innerHTML = '';
+
+            const orderDetails = {
+                drink: document.getElementById('drink').value,
+                drink_type: document.getElementById('drinkType').value,
+                food_category: document.getElementById('foodCategory').value,
+                food: document.getElementById('food').value
+            };
+
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    window.location.href = '/login.html';
+                    return;
+                }
+
+                const response = await fetch(`${API_URL}/recommendations/books`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(orderDetails)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    displayRecommendations(data);
+                } else {
+                    errorMessage.textContent = data.detail || 'Failed to get recommendations';
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.textContent = 'An error occurred. Please try again.';
+                errorMessage.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+            }
+        });
+
+        function displayRecommendations(books) {
+            const container = document.getElementById('recommendations');
+            
+            if (!books.length) {
+                container.innerHTML = '<p>No recommendations found for your selection.</p>';
+                return;
+            }
+
+            books.forEach(book => {
+                const card = document.createElement('div');
+                card.className = 'book-card';
+                card.innerHTML = `
+                    <h3>${book.title}</h3>
+                    <div class="book-detail"><strong>Author:</strong> ${book.author}</div>
+                    <div class="book-detail"><strong>Genres:</strong> ${book.genres.join(', ')}</div>
+                    <div class="book-detail"><strong>Reading Time:</strong> ${book.estimated_reading_time} minutes</div>
+                    <div class="book-detail"><strong>Rating:</strong> ${book.rating}/5</div>
+                    ${book.description ? `<p>${book.description}</p>` : ''}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            window.location.href = '/';
+        }
+
+        // Check authentication on page load
+        window.addEventListener('load', () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/login.html';
+            }
+        });
+    </script>
+</body>
+</html>

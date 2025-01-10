@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Literacy Cafe</title>
+    <style>
+        :root {
+            --primary-bg: #FAF7F0;
+            --secondary-bg: #D8D2C2;
+            --accent: #B17457;
+            --text: #4A4947;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+        }
+
+        nav {
+            background-color: var(--secondary-bg);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links .auth-btn {
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links .auth-btn:hover {
+            opacity: 0.9;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(250, 247, 240, 0.9), rgba(250, 247, 240, 0.9)),
+                        url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80') center/cover;
+        }
+
+        .hero-content {
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .features {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .features h2 {
+            text-align: center;
+            color: var(--accent);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            background: var(--primary-bg);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: var(--accent);
+            margin: 1rem 0;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .cta-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-content">
+            <a href="/" class="logo">Literacy Cafe</a>
+            <div class="nav-links" id="navLinks">
+                <a href="/">Home</a>
+                <a href="/recommendations.html">Books</a>
+                <div id="authButtons">
+                    <a href="/login.html" class="auth-btn">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Discover Your Perfect Read</h1>
+            <p>Experience a unique blend of coffee and literature. Our AI-powered system recommends books based on your mood and current order, creating a personalized reading journey.</p>
+            <a href="/register.html" class="cta-btn" id="mainCTA">Get Started</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose Us</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Smart Recommendations</h3>
+                    <p>Our AI understands your reading preferences and matches them with your current mood and order.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Curated Collection</h3>
+                    <p>Carefully selected books across various genres to match every taste and preference.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Perfect Atmosphere</h3>
+                    <p>A cozy environment designed for the perfect reading experience with your favorite beverage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const API_URL = 'https://literacy-cafe-production.up.railway.app/api/v1';
+        
+        // Check authentication status
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            const authButtons = document.getElementById('authButtons');
+            const mainCTA = document.getElementById('mainCTA');
+            
+            if (token) {
+                authButtons.innerHTML = `
+                    <a href="/recommendations.html" class="auth-btn">My Books</a>
+                `;
+                mainCTA.href = '/recommendations.html';
+                mainCTA.textContent = 'View Recommendations';
+            }
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('token');
+            window.location.href = '/';
+        }
+
+        // Check auth on page load
+        window.addEventListener('load', checkAuth);
+    </script>
+</body>
+</html>
