@@ -24,17 +24,22 @@ body {
     padding: 0 20px;
 }
 
-/* Navigation */
+/* Improved Navbar Styles */
 nav {
-    background-color: var(--secondary-bg);
-    padding: 1rem;
+    background-color: rgba(216, 210, 194, 0.95); /* Menggunakan warna dari color palette dengan sedikit transparansi */
+    padding: 1rem 2rem;
     position: fixed;
     width: 100%;
-    z-index: 100;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,38 +47,60 @@ nav {
 
 .logo {
     font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--accent);
+    font-weight: 600;
+    color: #B17457; /* Warna dari color palette */
     text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    opacity: 0.8;
 }
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
     align-items: center;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: var(--text);
+    color: #4A4947; /* Warna dari color palette */
     font-weight: 500;
-    transition: color 0.3s;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
 }
 
 .nav-links a:hover {
-    color: var(--accent);
+    color: #B17457;
+    background-color: rgba(177, 116, 87, 0.1);
 }
 
-.nav-links .auth-btn {
-    background: var(--accent);
-    color: white;
+/* Style khusus untuk tombol My Books */
+.nav-links a.auth-btn {
+    background-color: #B17457;
+    color: #FAF7F0;
     padding: 0.5rem 1.5rem;
-    border-radius: 5px;
-    transition: opacity 0.3s;
+    border-radius: 6px;
+    transition: all 0.3s ease;
 }
 
-.nav-links .auth-btn:hover {
-    opacity: 0.9;
+.nav-links a.auth-btn:hover {
+    background-color: #995e46;
+    transform: translateY(-2px);
+}
+
+/* Mobile hamburger menu */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #4A4947;
+    cursor: pointer;
+    padding: 0.5rem;
 }
 
 /* Hero Section */
@@ -170,9 +197,37 @@ nav {
         font-size: 2.5rem;
     }
 
+    .hamburger {
+        display: block;
+    }
+
     .nav-links {
         display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: rgba(216, 210, 194, 0.95);
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
     }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a.auth-btn {
+        width: auto;
+        margin-top: 0.5rem;
+    }
+
 
     .features-grid {
         grid-template-columns: 1fr;

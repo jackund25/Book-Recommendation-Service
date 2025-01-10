@@ -8,18 +8,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/chatbot.css">
 </head>
 <body>
     <nav>
-        <div class="container nav-content">
-            <a href="./" class="logo">Literacy Cafe</a>
+        <div class="nav-content">
+            <a href="./index.html" class="logo">Literacy Cafe</a>
             <div class="nav-links" id="navLinks">
-                <a href="./">Home</a>
-                <a href="./recommendations.html">Books</a>
-                <div id="authButtons">
-                    <a href="./login.html" class="auth-btn">Login</a>
-                </div>
+                <a href="./index.html">Home</a>
+                <a href="./books.html">Books</a>
+                <a href="./recommendations.html" class="auth-btn">My Books</a>
             </div>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
@@ -50,6 +54,22 @@
             </div>
         </div>
     </section>
+    <div class="chatbot-wrapper" id="chatbotWrapper">
+        <button class="chatbot-toggle" id="chatbotToggle" aria-label="Toggle chat">
+            <span class="icon">💬</span>
+            <span class="notification-badge" id="notificationBadge">1</span>
+        </button>
+        <div class="chatbot-container" id="chatbotContainer">
+            <!-- Chatbot akan di-inject ke sini oleh script -->
+        </div>
+    </div>
+    
+    <!-- Chatbot Scripts -->
+    <script>
+        window.MUSICMATE_API_KEY = 'mk_GVOQzFBK6BwjJVU_-lJIufW8Wnq8bx1iKphWHeccgeo';
+    </script>
+    <script src="https://spotify-bot.azurewebsites.net/static/js/widget-loader.js"></script>
+    <script src="./js/chatbot.js"></script>
 
     <script src="./js/config.js"></script>
     <script src="./js/main.js"></script>
