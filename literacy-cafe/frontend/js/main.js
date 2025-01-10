@@ -13,10 +13,35 @@ function checkAuth() {
     }
 }
 
-// Logout function
 function logout() {
-    localStorage.removeItem('token');
-    window.location.href = './';
+    // Hapus token dari localStorage
+    localStorage.removeItem(APP_CONFIG.TOKEN_KEY);
+    
+    // Hapus data user lainnya jika ada
+    localStorage.removeItem('user_preferences');
+    localStorage.removeItem('rememberedEmail');
+    
+    // Redirect ke halaman home
+    window.location.href = './index.html';
+}
+
+// Fungsi untuk mengecek status auth dan menampilkan tombol yang sesuai
+function updateAuthButtons() {
+    const token = localStorage.getItem(APP_CONFIG.TOKEN_KEY);
+    const authButtons = document.getElementById('authButtons');
+    
+    if (token) {
+        // User sudah login
+        authButtons.innerHTML = `
+            <a href="./recommendations.html" class="mybooks-btn">My Books</a>
+            <button onclick="logout()" class="logout-btn">Logout</button>
+        `;
+    } else {
+        // User belum login
+        authButtons.innerHTML = `
+            <a href="./login.html" class="auth-btn">Login</a>
+        `;
+    }
 }
 
 // Mobile navigation toggle

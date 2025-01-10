@@ -12,18 +12,17 @@
 </head>
 <body>
     <nav>
-        <div class="nav-content">
+        <div class="container nav-content">
             <a href="./index.html" class="logo">Literacy Cafe</a>
             <div class="nav-links" id="navLinks">
                 <a href="./index.html">Home</a>
                 <a href="./books.html">Books</a>
-                <a href="./recommendations.html" class="auth-btn">My Books</a>
+                <div id="authButtons">
+                    <a href="./recommendations.html" class="mybooks-btn">My Books</a>
+                    <button onclick="logout()" class="logout-btn">Logout</button>
+                </div>
             </div>
-            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
         </div>
     </nav>
 
