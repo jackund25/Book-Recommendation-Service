@@ -1,8 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
     const chatbotToggle = document.getElementById('chatbotToggle');
-    const chatbotContainer = document.getElementById('chatbotContainer');
     const notificationBadge = document.getElementById('notificationBadge');
     let isMinimized = true;
+
+    const chatbotContainer = document.getElementById('chatbotContainer');
+    if (!chatbotContainer) {
+        console.error('Chatbot container not found!');
+        return;
+    }
+
+    function initializeChatbot() {
+        try {
+            // Existing chatbot initialization code
+        } catch (error) {
+            console.error('Failed to initialize chatbot:', error);
+            // Tampilkan pesan error yang user-friendly
+        }
 
     // Initial state
     setTimeout(() => {
